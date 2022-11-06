@@ -15,13 +15,18 @@ event.preventDefault();
   setTodos([...todos, todo]);
 }
 
+const deleteByIndex = index => {
+    setTodos(oldValues => {
+        return oldValues.filter((_, i) => i !== index);
+    })
+}
 return (
-  <div>
-    <body>
+<div>
+    <div class="content-box">
     <label>Description: </label><input type="text" name="desc" onChange={inputChanged} value={todo.desc}/>
     <label>Date: </label><input type="date" name="date" onChange={inputChanged} value={todo.date}/>
-    <button onClick={addTodo}>Add</button>
-    </body>
+    <button name="add" onClick={addTodo}>Add</button>
+    </div>
     <table>
      <thead>
         <tr>
@@ -34,6 +39,7 @@ return (
       todos.map((todo, index) => <tr key={index}>
         <td>{todo.date}</td>
         <td>{todo.desc}</td>
+        <td><button onClick={() => deleteByIndex(index)}>Delete</button></td>
         </tr>)
       }
     </tbody>
